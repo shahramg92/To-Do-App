@@ -1,0 +1,15 @@
+<ul>
+  {{#each results}}
+  {{#if done}}
+    <span class="struck">
+  {{/if}}
+  <li>
+    <a href="todos/{{id}}">{{id}}: {{description}}</a>
+  </li>
+  {{#if done}}
+    </span>
+  {{/if}}
+  {{/each}}
+  <br> <br> <br>
+  <a href="todos/add">Click here to add a new item.</a>
+</ul>

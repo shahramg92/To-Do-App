@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/shahramg92/to-do-app/issues"
   },
-  "homepage": "https://github.com/shahramg92/to-do-app#readme"
+  "homepage": "https://github.com/shahramg92/to-do-app#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "nodemon": "^1.12.1",
+    "pg-promise": "^7.3.1"
+  }
 }
