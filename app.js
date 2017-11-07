@@ -1,3 +1,17 @@
+// Create a database with the following schema:
+//
+// CREATE TABLE task (
+//   id serial PRIMARY KEY,
+//   description varchar,
+//   done boolean
+// );
+// The app should meet the following requirements:
+//
+// URL /todos should list all your ToDos
+// URL /todos/add should have a form which lets you add a ToDo
+// URL /todo/done/:id should mark a ToDo as done.
+
+
 // import express
 const express = require('express');
 // set up express server
@@ -7,27 +21,12 @@ const promise = require('bluebird');
 const pgp = require('pg-promise')({promiseLib: promise});
 const db = pgp({database: 'todo'});
 
+
 app.set('view engine', 'hbs');
 app.use('/static', express.static('public'));
 app.use(body_parser.urlencoded({extended: false}));
 
-/*  database layout
-// id, description, done (flag)
 
-CREATE TABLE task (
-  id serial PRIMARY KEY,
-  description varchar,
-  done boolean
-);
-
-
-The app should meet the following requirements:
-
-  1.  URL /todos should list all your ToDos
-  2.  URL /todos/add should have a form which lets you add a ToDo
-  3.  URL /todo/done/:id should mark a ToDo as done.
-
-*/
 app.get('/', function(request, response){
   response.send('test')
 })
@@ -44,20 +43,21 @@ app.get('/todos', function(request, response) {
     })
 });
 
-app.get('/todos/:id', function(request, response) {
+app.get('/todos/form', function(request, response) {
+  context = {
+    title: "Add a new To-Do"
+  }
+  response.render('form.hbs', context)
+});
+
+app.get('/todos/:id', function(request, response, next) {
   id = request.params.id;
   query = 'UPDATE task SET done = TRUE WHERE id = $1'
   db.any(query, id)
     .then (function() {
       response.redirect('/todos')
     })
-})
-
-app.get('/todos/add', function(request, response) {
-  context = {
-    title: "Add a new To-Do"
-  }
-  response.render('add.hbs', context)
+    .catch(next);
 })
 
 app.get('/error', function(request, response) {
@@ -66,18 +66,15 @@ app.get('/error', function(request, response) {
 
 app.post('/submit', function(request, response, next){
   let query = 'INSERT INTO task VALUES (DEFAULT, $1 ,DEFAULT)';
-  let item = request.body.description;
+  let item = request.body.name;
   console.log(item);
-  db.none(query, item)
+  db.query(query, item)
     .then (function() {
       response.redirect('/todos')
     })
-    .catch(function(err){
-      console.error(err);
-      response.redirect('/error')
-    })
+    .catch(next);
 })
 
-app.listen(8000, function(request, response){
-  console.log('Listening on port 8000')
-})
+app.listen(1337, function(request, response){
+  console.log('Access granted to port 1337')
+});

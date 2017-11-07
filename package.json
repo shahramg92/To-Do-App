@@ -2,7 +2,7 @@
   "name": "to-do-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +20,7 @@
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "hbs": "^4.0.1",
     "nodemon": "^1.12.1",
     "pg-promise": "^7.3.1"
   }

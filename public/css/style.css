@@ -5,6 +5,7 @@ h1, form {
 h1 {
   margin-top: 2em;
   text-decoration: underline;
+  color: white;
 }
 
 a {
@@ -14,8 +15,12 @@ a {
 
 
 body {
-  background-color: grey;
+  background: url('/static/css/spacebackground.jpg') no-repeat center center fixed;
+  background-size: contain;
   font-family: sans-serif;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 }
 
 #return {
