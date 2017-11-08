@@ -35,6 +35,8 @@ app.use(body_parser.urlencoded({extended: false}));
 app.get('/', function(request, response){
   response.send('test')
 })
+
+
 app.get('/todos', function(request, response, next) {
   query = 'SELECT * FROM task'
   db.any(query)
@@ -45,12 +47,14 @@ app.get('/todos', function(request, response, next) {
     .catch(next);
 })
 
+
 app.get('/todos/form', function(request, response) {
   context = {
     title: "Add a new To-Do"
   }
   response.render('form.hbs', context)
 });
+
 
 app.get('/todos/:id', function(request, response, next) {
   id = request.params.id;
@@ -73,6 +77,7 @@ app.post('/submit', function(request, response, next){
     })
     .catch(next);
 })
+
 
 app.listen(1337, function(request, response){
   console.log('Access granted to port 1337')
