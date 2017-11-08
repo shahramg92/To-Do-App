@@ -16,32 +16,34 @@
 const express = require('express');
 // set up express server
 const app = express();
+
 const body_parser = require('body-parser');
 const promise = require('bluebird');
 const pgp = require('pg-promise')({promiseLib: promise});
 const db = pgp({database: 'todo'});
 
-
+// Handlebars setup
 app.set('view engine', 'hbs');
+
+// Set Static Path
 app.use('/static', express.static('public'));
+
+// Body Parser Middleware
 app.use(body_parser.urlencoded({extended: false}));
 
 
 app.get('/', function(request, response){
   response.send('test')
 })
-app.get('/todos', function(request, response) {
+app.get('/todos', function(request, response, next) {
   query = 'SELECT * FROM task'
   db.any(query)
     .then (function(resultsArray) {
       context = {title: "To-do List", results: resultsArray}
       response.render('todos.hbs', context)
     })
-    .catch(function(err){
-      console.error(err);
-      response.send('Something went wrong! Sorry. Error text: ' + err)
-    })
-});
+    .catch(next);
+})
 
 app.get('/todos/form', function(request, response) {
   context = {
@@ -60,9 +62,6 @@ app.get('/todos/:id', function(request, response, next) {
     .catch(next);
 })
 
-app.get('/error', function(request, response) {
-  response.render('error.hbs')
-})
 
 app.post('/submit', function(request, response, next){
   let query = 'INSERT INTO task VALUES (DEFAULT, $1 ,DEFAULT)';

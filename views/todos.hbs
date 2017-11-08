@@ -1,10 +1,10 @@
-<ul>
+<ol>
   {{#each results}}
   {{#if done}}
     <span class="struck">
   {{/if}}
   <li>
-    <a href="todos/{{id}}">{{id}}: {{description}}</a>
+    <a href="todos/{{id}}"> {{description}}</a>
   </li>
   {{#if done}}
     </span>
@@ -12,4 +12,4 @@
   {{/each}}
   <br> <br> <br>
   <a href="todos/form">Click here to add a new item.</a>
-</ul>
+</ol>
