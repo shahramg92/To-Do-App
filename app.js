@@ -33,7 +33,7 @@ app.use(body_parser.urlencoded({extended: false}));
 
 
 app.get('/', function(request, response){
-  response.send('test')
+  response.render('todos.hbs')
 })
 
 
