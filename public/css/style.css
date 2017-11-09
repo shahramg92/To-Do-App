@@ -48,3 +48,8 @@ form, ol {
   color: #aaa;
   line-height: 1.8em;
 }
+
+.button-style {
+  display: block;
+  margin: 0 auto; 
+}

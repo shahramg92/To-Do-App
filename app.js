@@ -55,6 +55,15 @@ app.get('/todos/form', function(request, response) {
   response.render('form.hbs', context)
 });
 
+app.get('/todos/delete/', function (request, response, next) {
+    // insert query
+    let update = "DELETE FROM task;"  //inserts value into task table in the todo_database
+    db.none(update)
+        .then(function(){
+            response.redirect('/todos'); //redirects to todos page.
+        })
+        .catch(next);
+});
 
 app.get('/todos/:id', function(request, response, next) {
   id = request.params.id;
@@ -76,9 +85,9 @@ app.post('/submit', function(request, response, next){
       response.redirect('/todos')
     })
     .catch(next);
-})
+});
 
-
-app.listen(1337, function(request, response){
+var PORT = process.env.PORT || 8000;
+app.listen(PORT, function(){
   console.log('Access granted to port 1337')
 });
