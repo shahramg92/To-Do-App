@@ -20,7 +20,7 @@ const app = express();
 const body_parser = require('body-parser');
 const promise = require('bluebird');
 const pgp = require('pg-promise')({promiseLib: promise});
-const db = pgp({database: 'todo'});
+const db = pgp(process.env.DATABASE_URL || {database: 'todo'});
 
 // Handlebars setup
 app.set('view engine', 'hbs');
@@ -89,5 +89,9 @@ app.post('/submit', function(request, response, next){
 
 var PORT = process.env.PORT || 8000;
 app.listen(PORT, function(){
-  console.log('Access granted to port 1337')
+  console.log('Access granted to port 8000')
 });
+
+// app.listen(1337, function(request, response){
+//   console.log('Access granted to port 1337')
+// });
