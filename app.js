@@ -16,9 +16,7 @@
 const express = require('express');
 // set up express server
 const app = express();
-
 const body_parser = require('body-parser');
-const promise = require('bluebird');
 const pgp = require('pg-promise')({promiseLib: promise});
 const db = pgp(process.env.DATABASE_URL || {database: 'todo'});
 
