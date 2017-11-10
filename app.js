@@ -17,7 +17,7 @@ const express = require('express');
 // set up express server
 const app = express();
 const body_parser = require('body-parser');
-const pgp = require('pg-promise')({promiseLib: promise});
+const pgp = require('pg-promise')({});
 const db = pgp(process.env.DATABASE_URL || {database: 'todo'});
 
 // Handlebars setup
