@@ -8,4 +8,4 @@ Once you add a task, you will be redirected to the main page and your tasks will
 <img src="/screenshots/addtasks.jpg"/>
 
 When you finish a task, you can click on it which will draw a line in the middle and grey the task out. When you have finished all the tasks or want to clear your to-do list, simply click "Click here to delete all tasks" which will clear the list.
-<img src="finishtask.jpg"/>
+<img src="/screenshots/finishtask.jpg"/>
